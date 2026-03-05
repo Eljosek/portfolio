@@ -14,7 +14,7 @@
     "@react-three/drei": "^9.109.2",
     "@react-three/fiber": "^8.17.5",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.35.0",
+    "framer-motion": "11.18.2",
     "gsap": "^3.12.5",
     "lenis": "^1.1.9",
     "next": "15.5.12",
