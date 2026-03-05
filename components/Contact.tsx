@@ -209,8 +209,10 @@ export default function Contact() {
                 target={link.icon !== 'download' && link.icon !== 'mail' ? '_blank' : undefined}
                 rel={link.icon !== 'download' && link.icon !== 'mail' ? 'noopener noreferrer' : undefined}
                 className={`flex items-center gap-3 px-5 py-3.5 rounded-xl font-medium text-sm transition-all duration-200 ${
-                  link.icon === 'download'
+                  link.icon === 'download' && link.color === '#3776AB'
                     ? 'bg-[#3776AB] text-white shadow-lg shadow-blue-900/20 hover:bg-[#4a8fc7]'
+                    : link.icon === 'download' && link.color === '#FF9900'
+                    ? 'bg-[#FF9900]/15 text-[#FF9900] border border-[#FF9900]/30 hover:bg-[#FF9900]/25'
                     : 'glass glass-hover text-white/60 hover:text-white'
                 }`}
               >

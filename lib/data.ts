@@ -368,10 +368,17 @@ export const SOCIAL_LINKS = [
     description: 'josemiguelherreragutierrez7@gmail.com',
   },
   {
-    label: 'Download CV',
+    label: 'CV — English',
     icon: 'download',
-    url: '/jose_herrera_cv_en.pdf',
+    url: '/cv-en.pdf',
     color: '#3776AB',
-    description: 'Resume (English)',
+    description: 'Download resume (EN)',
+  },
+  {
+    label: 'CV — Español',
+    icon: 'download',
+    url: '/cv-es.pdf',
+    color: '#FF9900',
+    description: 'Descargar hoja de vida (ES)',
   },
 ]

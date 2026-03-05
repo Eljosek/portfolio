@@ -362,6 +362,47 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
+        {/* CV Download row */}
+        <motion.div
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16 -mt-8"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.1, duration: 0.6 }}
+        >
+          <span className="text-xs font-mono text-white/25 tracking-widest uppercase hidden sm:inline">Resume</span>
+          <span className="text-white/15 hidden sm:inline">&mdash;</span>
+          <motion.a
+            href="/cv-en.pdf"
+            download="CV_Jose_Herrera_EN.pdf"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/10 text-white/60 text-xs font-mono hover:border-[#3776AB]/60 hover:text-white hover:bg-[#3776AB]/10 transition-all duration-200"
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            English
+            <span className="px-1.5 py-0.5 rounded text-[9px] bg-[#3776AB]/20 text-[#3776AB] border border-[#3776AB]/25">EN</span>
+          </motion.a>
+          <motion.a
+            href="/cv-es.pdf"
+            download="CV_Jose_Herrera_ES.pdf"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/10 text-white/60 text-xs font-mono hover:border-[#FF9900]/60 hover:text-white hover:bg-[#FF9900]/10 transition-all duration-200"
+            whileHover={{ scale: 1.05, y: -1 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Spanish
+            <span className="px-1.5 py-0.5 rounded text-[9px] bg-[#FF9900]/20 text-[#FF9900] border border-[#FF9900]/25">ES</span>
+          </motion.a>
+        </motion.div>
+
         {/* Stats row */}
         <motion.div
           className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto"
