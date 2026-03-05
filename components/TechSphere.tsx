@@ -61,7 +61,6 @@ function TechNode({
           color={hovered ? '#ffffff' : 'rgba(255,255,255,0.6)'}
           anchorX="center"
           anchorY="middle"
-          font="/fonts/jetbrains-mono.woff"
         >
           {tech.name}
         </Text>
