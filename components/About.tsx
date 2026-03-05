@@ -2,7 +2,6 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import Image from 'next/image'
 import { PERSONAL } from '@/lib/data'
 
 const tags = [
@@ -10,10 +9,10 @@ const tags = [
   { label: 'SENA', color: '#3ECF8E', description: 'Systems Technician, 2022–2024' },
   { label: 'Colombo', color: '#0078D4', description: 'English B2, bilingual education' },
   { label: 'Freelancer', color: '#3776AB', description: 'Production apps since 2024' },
-  { label: '🐍 Python', color: '#3776AB', description: 'Primary language' },
-  { label: '☁️ Cloud', color: '#4285F4', description: 'AWS & Azure learning path' },
-  { label: '📊 Data', color: '#F7931E', description: 'Analysis & visualization' },
-  { label: '🇨🇴 Pereira', color: '#888888', description: 'Coffee region, Colombia' },
+  { label: 'Python', color: '#3776AB', description: 'Primary language' },
+  { label: 'Cloud', color: '#4285F4', description: 'AWS & Azure learning path' },
+  { label: 'Data', color: '#F7931E', description: 'Analysis & visualization' },
+  { label: 'Pereira', color: '#888888', description: 'Coffee region, Colombia' },
 ]
 
 function FadeInWhenVisible({
@@ -66,8 +65,11 @@ function AvatarBlock() {
       >
         {/* Gradient placeholder */}
         <div className="w-full h-full bg-gradient-to-br from-[#111] via-[#1a1a2e] to-[#0a0a0a] flex flex-col items-center justify-center gap-3">
-          {/* Pixel art style avatar */}
-          <div className="text-6xl">👨‍💻</div>
+          {/* Code icon */}
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#3776AB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
           <div className="text-center">
             <p className="text-white/80 font-bold font-mono text-sm">JH</p>
             <p className="text-white/30 font-mono text-xs">v19.0.0</p>
@@ -90,12 +92,13 @@ function AvatarBlock() {
 
       {/* Tech badge */}
       <motion.div
-        className="absolute -top-3 -left-3 glass rounded-xl px-3 py-2 text-xs font-mono text-[#3776AB]"
+        className="absolute -top-3 -left-3 glass rounded-xl px-3 py-2 text-xs font-mono text-[#3776AB] flex items-center gap-1.5"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ delay: 0.8, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        🐍 Python-first
+        <img src="https://cdn.simpleicons.org/python/3776AB" width="12" height="12" alt="" aria-hidden="true" />
+        Python-first
       </motion.div>
     </div>
   )
@@ -150,7 +153,7 @@ export default function About() {
             <FadeInWhenVisible delay={0.2}>
               <p className="text-white/70 text-lg leading-relaxed">
                 Hey, I'm <span className="text-white font-semibold">Jose Miguel Herrera</span> — a 19-year-old
-                developer from <span className="text-[#FF9900]">Pereira, Colombia</span> (coffee capital of the world 🇨🇴).
+                developer from <span className="text-[#FF9900]">Pereira, Colombia</span> (coffee capital of the world).
                 I study Systems Engineering at <span className="text-white/90">UTP</span> and have been shipping
                 production apps as a freelancer since 2024.
               </p>
@@ -160,8 +163,8 @@ export default function About() {
               <p className="text-white/55 leading-relaxed">
                 My stack is built around <span className="font-mono text-[#3776AB]">Python</span> at the core —
                 from data manipulation to web backends — with a strong <span className="text-white/80">React/Next.js</span> frontend
-                layer. I've deployed real solutions for NGOs, insurance companies, and e-commerce businesses that people
-                actually use every day.
+                layer. I've deployed real solutions for NGOs, insurance companies, and e-commerce businesses
+                that people actually use every day.
               </p>
             </FadeInWhenVisible>
 
@@ -202,15 +205,24 @@ export default function About() {
             <FadeInWhenVisible delay={0.6}>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3">
                 {[
-                  { icon: '📍', label: 'Location', value: 'Pereira, Colombia' },
-                  { icon: '🎓', label: 'Education', value: 'UTP · 5th Semester' },
-                  { icon: '💬', label: 'Languages', value: 'Spanish · English B2' },
+                  {
+                    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3776AB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
+                    label: 'Location', value: 'Pereira, Colombia'
+                  },
+                  {
+                    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3776AB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c3.6 1.333 8.4 1.333 12 0v-5"/></svg>,
+                    label: 'Education', value: 'UTP · 5th Semester'
+                  },
+                  {
+                    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3776AB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+                    label: 'Languages', value: 'Spanish · English B2'
+                  },
                 ].map((fact) => (
                   <div
                     key={fact.label}
                     className="glass rounded-xl p-3.5 flex items-start gap-3"
                   >
-                    <span className="text-xl">{fact.icon}</span>
+                    <span className="mt-0.5 shrink-0">{fact.icon}</span>
                     <div>
                       <p className="text-white/30 text-xs font-mono mb-0.5">{fact.label}</p>
                       <p className="text-white/80 text-sm font-medium">{fact.value}</p>

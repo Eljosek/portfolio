@@ -5,7 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { PROJECTS, type Project } from '@/lib/data'
 
 // ─── Project Card ─────────────────────────────────────────────
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project, index, isDragging }: { project: Project; index: number; isDragging: boolean }) {
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -58,8 +58,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           animate={hovered ? { scale: 1.15, y: -5 } : { scale: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="text-5xl mb-2">
-            {project.tags[0]?.emoji || '🚀'}
+          <div
+            className="w-14 h-14 rounded-2xl mx-auto mb-3 flex items-center justify-center"
+            style={{ background: `${project.color}20`, border: `1px solid ${project.color}30` }}
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={project.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
           </div>
           <div
             className="text-xs font-mono px-3 py-1 rounded-full"
@@ -77,41 +83,43 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         )}
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 p-6 flex flex-col flex-1">
-        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
+      {/* Content — buttons pinned to bottom via absolute positioning */}
+      <div className="relative z-10 p-6 pb-[76px] flex flex-col h-[calc(100%-12rem)]">
+        <h3 className="text-lg font-bold text-white mb-2">
           {project.title}
         </h3>
 
-        {/* Description — shows brief by default, full on hover */}
-        <AnimatePresence mode="wait">
-          {hovered ? (
-            <motion.p
-              key="long"
-              className="text-white/50 text-sm leading-relaxed mb-4 flex-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {project.longDescription}
-            </motion.p>
-          ) : (
-            <motion.p
-              key="short"
-              className="text-white/50 text-sm leading-relaxed mb-4 flex-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {project.description}
-            </motion.p>
-          )}
-        </AnimatePresence>
+        {/* Description — fades between short and long on hover, clamped so it never overflows */}
+        <div className="relative mb-3 flex-1 overflow-hidden">
+          <AnimatePresence mode="wait">
+            {hovered ? (
+              <motion.p
+                key="long"
+                className="text-white/50 text-sm leading-relaxed line-clamp-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {project.longDescription}
+              </motion.p>
+            ) : (
+              <motion.p
+                key="short"
+                className="text-white/50 text-sm leading-relaxed line-clamp-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {project.description}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* Tech tags */}
-        <div className="flex flex-wrap gap-1.5 mb-5">
+        <div className="flex flex-wrap gap-1.5 mb-3">
           {project.tech.slice(0, 4).map((t) => (
             <span
               key={t}
@@ -133,20 +141,24 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
 
         {/* Category tags */}
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
               key={tag.label}
-              className="text-xs px-2.5 py-1 rounded-full font-mono flex items-center gap-1"
+              className="text-xs px-2.5 py-1 rounded-full font-mono"
               style={{ color: tag.color, background: `${tag.color}15`, border: `1px solid ${tag.color}25` }}
             >
-              {tag.emoji} {tag.label}
+              {tag.label}
             </span>
           ))}
         </div>
+      </div>
 
-        {/* Action buttons */}
-        <div className="flex gap-2 mt-auto">
+      {/* Action buttons — always visible, pinned to card bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-5 pt-3"
+        style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.95) 70%, transparent)' }}
+      >
+        <div className="flex gap-2" onPointerDown={(e) => e.stopPropagation()}>
           <motion.a
             href={project.demoUrl}
             target="_blank"
@@ -155,6 +167,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             style={{ background: project.color, boxShadow: `0 4px 20px ${project.color}30` }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
+            onClick={(e) => isDragging && e.preventDefault()}
           >
             Live Demo ↗
           </motion.a>
@@ -166,6 +179,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             style={{ background: 'rgba(255,255,255,0.03)' }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
+            onClick={(e) => isDragging && e.preventDefault()}
           >
             GitHub →
           </motion.a>
@@ -178,6 +192,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 // ─── Horizontal scroll with drag ─────────────────────────────
 function HorizontalCarousel() {
   const trackRef = useRef<HTMLDivElement>(null)
+  const [isDragging, setIsDragging] = useState(false)
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -188,15 +203,17 @@ function HorizontalCarousel() {
 
       <motion.div
         ref={trackRef}
-        className="flex gap-5 px-12 pb-4 horizontal-scroll overflow-x-auto"
+        className="flex gap-5 px-12 pb-4"
         drag="x"
-        dragConstraints={{ left: -(PROJECTS.length * 400), right: 0 }}
-        dragElastic={0.1}
-        style={{ cursor: 'grab' }}
-        whileDrag={{ cursor: 'grabbing' }}
+        dragConstraints={{ left: -((PROJECTS.length - 1) * 410), right: 0 }}
+        dragElastic={0.05}
+        dragMomentum={false}
+        style={{ cursor: isDragging ? 'grabbing' : 'grab', width: 'max-content' }}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setTimeout(() => setIsDragging(false), 50)}
       >
         {PROJECTS.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+          <ProjectCard key={project.id} project={project} index={i} isDragging={isDragging} />
         ))}
       </motion.div>
     </div>

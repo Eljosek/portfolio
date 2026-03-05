@@ -1,3 +1,4 @@
+// rebuild sentinel comment to bust shared chunk hash
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'

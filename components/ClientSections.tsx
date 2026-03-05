@@ -2,11 +2,11 @@
 
 import dynamic from 'next/dynamic'
 
-const TechSphere = dynamic(() => import('@/components/TechSphere'), {
+const TechStack = dynamic(() => import('@/components/TechStack'), {
   ssr: false,
   loading: () => (
     <section id="skills" className="section-padding flex items-center justify-center">
-      <div className="text-white/20 font-mono text-sm animate-pulse">Loading tech sphere...</div>
+      <div className="text-white/20 font-mono text-sm animate-pulse">Loading tech stack...</div>
     </section>
   ),
 })
@@ -41,7 +41,7 @@ const CloudPath = dynamic(() => import('@/components/CloudPath'), {
 export default function ClientSections() {
   return (
     <>
-      <TechSphere />
+      <TechStack />
       <Projects />
       <Timeline />
       <CloudPath />

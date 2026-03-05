@@ -234,7 +234,7 @@ export default function Contact() {
           transition={{ delay: 0.8 }}
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-white/20">
-            <div>Built with Next.js 14 · Framer Motion · Three.js · Tailwind CSS</div>
+            <div>Built with Next.js 15 · Framer Motion · Tailwind CSS</div>
             <div>© 2026 Jose Miguel Herrera Gutierrez</div>
           </div>
           <motion.p
@@ -242,7 +242,7 @@ export default function Contact() {
             animate={{ opacity: [0.08, 0.15, 0.08] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            Pereira, Colombia 🇨🇴 · UTC-5
+            Pereira, Colombia · UTC-5
           </motion.p>
         </motion.div>
       </div>

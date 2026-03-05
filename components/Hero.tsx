@@ -9,6 +9,21 @@ function ParticleNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animFrameRef = useRef<number>(0)
   const mouseRef = useRef({ x: 0, y: 0 })
+  const isPausedRef = useRef(false)
+
+  // Pause animation when not visible for performance
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const section = canvas.closest('section')
+    if (!section) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { isPausedRef.current = !entry.isIntersecting },
+      { threshold: 0 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -24,7 +39,7 @@ function ParticleNetwork() {
 
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
-    const PARTICLE_COUNT = Math.min(80, Math.floor((width * height) / 15000))
+    const PARTICLE_COUNT = Math.min(48, Math.floor((width * height) / 25000))
     const CONNECTION_DIST = 140
     const MOUSE_DIST = 180
 
@@ -46,6 +61,10 @@ function ParticleNetwork() {
     }))
 
     const draw = () => {
+      if (isPausedRef.current) {
+        animFrameRef.current = requestAnimationFrame(draw)
+        return
+      }
       ctx.clearRect(0, 0, width, height)
 
       // Connections
@@ -134,6 +153,7 @@ function ParticleNetwork() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full opacity-60"
+      style={{ willChange: 'transform', transform: 'translateZ(0)' }}
     />
   )
 }
@@ -242,7 +262,7 @@ export default function Hero() {
   const stats = [
     { label: 'Projects Shipped', value: '4+' },
     { label: 'Semester @ UTP', value: '5th' },
-    { label: 'Hours — Industry 4.0', value: '60' },
+    { label: 'Years Freelancing', value: '2+' },
     { label: 'English Level', value: 'B2' },
   ]
 
