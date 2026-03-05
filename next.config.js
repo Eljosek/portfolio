@@ -1,3 +1,5 @@
+const path = require('path')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: [
@@ -8,6 +10,16 @@ const nextConfig = {
     '@react-three/fiber',
     '@react-three/drei',
   ],
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        react: path.resolve(__dirname, 'node_modules/react'),
+        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+      }
+    }
+    return config
+  },
   images: {
     remotePatterns: [
       {
