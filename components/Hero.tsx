@@ -294,7 +294,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-16 md:pt-24">
         {/* Pre-label */}
         <motion.div
           className="flex items-center justify-center gap-2 mb-6"
@@ -352,14 +352,14 @@ export default function Hero() {
               <path d="M1 7h12M8 1.5l5.5 5.5L8 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </motion.button>
-          <motion.a
-            href="mailto:josemiguelherreragutierrez7@gmail.com"
+          <motion.button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-7 py-3.5 rounded-xl border border-white/10 text-white/70 font-medium text-sm hover:border-white/20 hover:text-white transition-all duration-200"
             whileHover={{ scale: 1.04, y: -1 }}
             whileTap={{ scale: 0.97 }}
           >
             Get in touch
-          </motion.a>
+          </motion.button>
         </motion.div>
 
         {/* CV Download row */}

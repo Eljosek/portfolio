@@ -63,17 +63,14 @@ function AvatarBlock() {
         whileHover={{ scale: 1.03, rotateY: 4 }}
         style={{ perspective: 800 }}
       >
-        {/* Gradient placeholder */}
-        <div className="w-full h-full bg-gradient-to-br from-[#111] via-[#1a1a2e] to-[#0a0a0a] flex flex-col items-center justify-center gap-3">
-          {/* Code icon */}
-          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#3776AB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8">
-            <polyline points="16 18 22 12 16 6"/>
-            <polyline points="8 6 2 12 8 18"/>
-          </svg>
-          <div className="text-center">
-            <p className="text-white/80 font-bold font-mono text-sm">JH</p>
-            <p className="text-white/30 font-mono text-xs">v19.0.0</p>
-          </div>
+        {/* Gradient placeholder / pixel-art photo */}
+        <div className="w-full h-full bg-gradient-to-br from-[#111] via-[#1a1a2e] to-[#0a0a0a]">
+          <img
+            src="/avatar-pixel.png"
+            alt="Jose Herrera — pixel art portrait"
+            className="w-full h-full object-cover object-top"
+            style={{ imageRendering: 'pixelated' }}
+          />
         </div>
         {/* Shine overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />

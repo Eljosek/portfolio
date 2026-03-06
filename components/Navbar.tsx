@@ -135,22 +135,24 @@ export default function Navbar() {
             {/* CTA — Desktop */}
             <div className="hidden md:flex items-center gap-3">
               <motion.a
-                href="mailto:josemiguelherreragutierrez7@gmail.com"
+                href="https://linkedin.com/in/jose-miguel-herrera-guti%C3%A9rrez-841319340"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-4 py-2 text-sm font-medium rounded-xl text-white/70 hover:text-white transition-colors duration-200 border border-white/[0.06] hover:border-white/[0.15]"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Say Hi 👋
+                Say Hi
               </motion.a>
-              <motion.a
-                href="/jose_herrera_cv_en.pdf"
-                download
-                className="px-4 py-2 text-sm font-medium rounded-xl bg-[#3776AB] text-white hover:bg-[#4a8fc7] transition-colors duration-200 shadow-lg shadow-blue-900/20"
+              <motion.button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-4 py-2 text-sm font-medium rounded-xl bg-[#3776AB] text-white hover:bg-[#4a8fc7] transition-colors duration-200 shadow-lg shadow-blue-900/20 flex items-center gap-1.5"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Resume ↗
-              </motion.a>
+                Resume
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </motion.button>
             </div>
 
             {/* Mobile hamburger */}

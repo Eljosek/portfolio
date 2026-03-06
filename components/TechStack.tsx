@@ -21,13 +21,9 @@ const SIMPLE_ICONS: Record<string, string> = {
   javascript: 'javascript',
   numpy: 'numpy',
   pandas: 'pandas',
-  matplotlib: 'matplotlib',
   scikitlearn: 'scikitlearn',
   jupyter: 'jupyter',
-  amazonaws: 'amazonaws',
-  microsoftazure: 'microsoftazure',
   databricks: 'databricks',
-  googlecloud: 'googlecloud',
   react: 'react',
   nextdotjs: 'nextdotjs',
   tailwindcss: 'tailwindcss',
@@ -39,6 +35,14 @@ const SIMPLE_ICONS: Record<string, string> = {
   docker: 'docker',
   vercel: 'vercel',
   postgresql: 'postgresql',
+}
+
+// Devicons CDN for logos not available / reliable in SimpleIcons
+const DEVICONS: Record<string, string> = {
+  matplotlib: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg',
+  amazonaws: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
+  microsoftazure: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
+  googlecloud: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg',
 }
 
 // ─── Individual tech card ─────────────────────────────────────
@@ -82,7 +86,15 @@ function TechCard({ tech, index }: { tech: Tech; index: number }) {
             }
             transition={{ duration: 0.5 }}
           >
-            {SIMPLE_ICONS[tech.icon] ? (
+            {DEVICONS[tech.icon] ? (
+              <img
+                src={DEVICONS[tech.icon]}
+                width="28"
+                height="28"
+                alt={tech.name}
+                className="opacity-85"
+              />
+            ) : SIMPLE_ICONS[tech.icon] ? (
               <img
                 src={`https://cdn.simpleicons.org/${SIMPLE_ICONS[tech.icon]}/ffffff`}
                 width="28"
